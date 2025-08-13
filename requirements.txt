@@ -1,0 +1,9 @@
+langchain
+langchain-google-genai
+faiss-cpu
+sentence-transformers
+flask
+flask-cors
+gunicorn
+python-dotenv
+pytest
