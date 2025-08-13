@@ -45,18 +45,25 @@ qa_chain = RetrievalQA.from_chain_type(
     return_source_documents=True,
 )
 
-def get_answer(query):
+def get_answer_with_sources(query):
     """Gets an answer from the RAG chain"""
     try:
         result = qa_chain.invoke(query)
-        return result['result']
+        answer = result['result']
+        sources = [
+            {'source': d.metadata.get('source', 'unknown'), 'content': d.page_content[:300] + '...' if len(d.page_content) > 300 else d.page_content}
+            for d in result.get('source_documents', [])
+        ]
+        if not answer:
+            answer = "Not found"
+        return {"answer": answer, "sources": sources}
     except Exception as e:
         return f"An error occurred: {e}"
     
 #Test the RAG chain
 if __name__ == "__main__":
     question = "What is the person's phone number in the CV?"
-    result = get_answer(question)
+    result = get_answer_with_sources(question)
     print(f"Question: {question}")
     print(f"Answer: {result}")
     print(f"\nRetrieved chunks Preview:")

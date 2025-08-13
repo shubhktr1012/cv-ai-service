@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from rag_core import get_answer
+from rag_core import get_answer_with_sources
 
 app = Flask(__name__)
 CORS(app) #Allows our Node.js server to call this API
@@ -11,13 +11,13 @@ def health():
 
 @app.route("/ask", methods=["POST"]) # a decorator, is followed by a function
 def ask():
-    data = request.get_json()
-    question = data.get("question")
+    data = request.get_json(silent=True) or {}
+    question = (data.get("question") or "").strip()
     if not question:
         return jsonify({"error": "Question is required"}), 400
     
-    answer = get_answer(question)
-    return jsonify({"answer": answer})
+    payload = get_answer_with_sources(question)
+    return jsonify(payload)
 
 if __name__ == "__main__":
     print("Starting server...")
