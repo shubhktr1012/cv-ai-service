@@ -1,0 +1,22 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+    volumes:
+      - ./cv.txt:/app/cv.txt
+
+  gateway:
+    build:
+      context: ./cv-api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - AI_SERVICE_URL=http://backend:5000/ask
+    depends_on:
+      - backend

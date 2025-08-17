@@ -1,0 +1,26 @@
+# Git
+.git
+.gitignore
+
+# Docker
+docker-compose.yml
+dockerfile
+.dockerignore
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Node
+cv-api-gateway/node_modules
+npm-debug.log
+
+# IDE / OS files
+.vscode
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+.DS_Store
