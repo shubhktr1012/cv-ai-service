@@ -60,3 +60,4 @@ faiss_store/
 
 # Misc
 .python-version
+node_modules/
