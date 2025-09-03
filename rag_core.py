@@ -6,7 +6,7 @@ from langchain_community.vectorstores import FAISS #FAISS is a vector store for 
 from langchain.text_splitter import RecursiveCharacterTextSplitter #split text into chunks
 from langchain_community.document_loaders import TextLoader #load text files
 from langchain.chains import RetrievalQA #retrieval QA chain to use over your own data
-from langchain.prompts import PromptTemplate #prompt template to use over your own data
+from langchain.prompts import PromptTemplate #prompt template to use over your own datas
 
 #Load environment variables
 load_dotenv()

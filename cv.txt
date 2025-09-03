@@ -1,142 +1,88 @@
-Name - Shubh Khatri
-Full Stack Developer | AI & Automation Professional
+Shubh Khatri
 
+Full Stack Developer | AI & Automation Professional
 +917089983626 | shubh12khatri@gmail.com | Indore, M.P., 452010 | GitHub | LinkedIn
 
 SUMMARY
-
-A Full-Stack Developer with hands-on experience building cloud-native, AI-integrated, and automation-focused tools. Eager to contribute to modern engineering
-
-teams driving innovation with platforms like n8n, Zapier, and OpenAI.
-
+A Full-Stack Developer with hands-on experience building cloud-native, AI-integrated, and automation-focused tools. Eager to contribute to modern engineering teams
+driving innovation with platforms like n8n, Zapier, and OpenAI.
 SKILLS
-
 Languages and Frameworks JAVA, Python, JavaScript, TypeScript, Next.js, Data Structure and Algorithms, Object Oriented Programming, AngularJS, Git, Flask
-
-Frontend: HTML5, CSS3, React, Tailwind CSS, Framer, Framer Motion, GSAP, Adobe Photoshop
-
-Backend: Node.js, PostgreSQL, MongoDB, Supabase, REST APIs, FastAPI, NGINX, FFmpeg
-
-Cloud and DevOps: Git (Version Control System), GitHub, Docker, Google Cloud Platform (GCP), AWS, Cloud Functions, Cloud Storage, Jenkins, IAM
-
-Low-Code Tools: n8n, OpenAI (API usage, prompt design), Zapier
-
-Tools & Other: Postman, cURL, Whisper AI, Adobe Photoshop
-
+Frontend HTML5, CSS3, React, Tailwind CSS, Framer, Framer Motion, GSAP, Adobe Photoshop
+Backend Node.js, PostgreSQL, MongoDB, Supabase, REST APIs, FastAPI, NGINX, FFmpeg
+Cloud and DevOps Git (Version Control System), GitHub, Docker, Google Cloud Platform (GCP), AWS, Cloud Functions, Cloud Storage, Jenkins, IAM
+Low-Code Tools n8n, OpenAI (API usage, prompt design), Zapier
+Tools & Other Postman, cURL, Whisper AI, Adobe Photoshop
 EXPERIENCE
-
-Freelance Full Stack Developer & Product Builder Jan '24 — Present
-
-Self-Employed Indore, India (Remote)
-
+Freelance Full Stack Developer & Product Builder
+Jan '24 — Present
+Self-Employed
+Indore, India (Remote)
 Client Work:
-
 Advocate Portfolio Website
-
 Designed and built a professional portfolio for a law professional, improving their online presence and lead capture potential by an estimated 40%.
-
 Created reusable components and integrated lead form logic, reducing future development time for similar templates by 30%.
-
 Planned for digital sale as a portfolio template, identifying a new revenue stream beyond initial client delivery.
-
 Tech Stack: Framer, Framer Motion, JavaScript
-
-Link:
-
+Link: https://github.com/shubhktr1012/adv-site-1
 Charlie Popcorn
-
-Developed a dynamic landing page for a food startup, integrating a product catalog and inquiry forms for streamlined customer interaction.
-
+Developed a dynamic landing page for a food startup, integrating a product catalog and inquiry forms for streamlined customer interaction.
 Ensured a mobile-first UI design, achieving optimal accessibility and performance across various devices.
-
 Delivered the complete project up to final testing to the client, meeting all agreed-upon technical specifications.
-
 Tech Stack: Tailwind CSS, React, Node.js, JavaScript, TypeScript, Framer Motion, Netlify﻿
-
 Link: https://github.com/shubhktr1012/charlie-popcorn
-
 Business Projects:
-
 Punjabi Rishtey (Project Manager/Co-Developer)
-
 Led the revamp of a matrimonial site for a family-owned business, modernizing its platform and enhancing user engagement by an estimated 35%.
-
 Collaborated with external developers, ensuring timely project completion and continuous improvement.
-
 Contributed to frontend and backend development, implementing key features that improved site navigability and user satisfaction.
-
 Tech Stack: HTML, Tailwind CSS, React, Node.js, JavaScript, TypeScript, Vercel
-
 Link: https://www.punjabi-rishtey.com/
-
 Internal Projects/SaaS:
-
 unClut.ai - Gmail Smart Auto-unsubscribe Tool
-
-Developed a Python tool using Gmail API to parse the inbox, find promotional emails, and detect unsubscribe links using MIME + regex, reducing inbox clutter
-
-by up to 80%.
-
-Integrated OAuth2 authentication and a CLI-based email preview system for safe, user-driven unsubscribing, ensuring 100% accuracy in sender selection
-
-during internal testing.
-
+Developed a Python tool using Gmail API to parse the inbox, find promotional emails, and detect unsubscribe links using MIME + regex, reducing inbox clutter by
+up to 80%.
+Integrated OAuth2 authentication and a CLI-based email preview system for safe, user-driven unsubscribing, ensuring 100% accuracy in sender selection during
+internal testing.
 Tested on 4 personal Gmail accounts with filters to delete or archive from selected senders.
-
 Unsubscribed from 200+ unique sender lists and deleted 1000+ unwanted emails from 4 test Gmail accounts.
-
-Currently transitioning the tool into a Chrome Extension that injects directly into Gmail’s DOM, enabling one-click unsubscribes and inbox cleanups —
-
-projected to reduce manual effort by 90% and support 1000+ emails per user with monetization features underway.
-
+Currently transitioning the tool into a Chrome Extension that injects directly into Gmail’s DOM, enabling one-click unsubscribes and inbox cleanups — projected
+to reduce manual effort by 90% and support 1000+ emails per user with monetization features underway.
 Link: https://github.com/shubhktr1012/unclut-ai
-
-Doubt Mentor Nov '20 — Feb '21
-
-PrepBytes Indore (Remote)
-
+Doubt Mentor
+Nov '20 — Feb '21
+PrepBytes
+Indore (Remote)
 .
-
 Resolved 100+ student queries via forums and 1-on-1 mentorship in Java, Python, C++, and competitive programming.
-
 Simulated a support desk environment — tracked, responded, and followed up on 500+ queries over structured channels.
-
 PROJECTS
-
-WhirlStudio- An AI-Powered OTT-Style Video Library Present
-
-Developing an AI-powered OTT-style desktop application for interactive local movie and show management.
-
-Integrating AI-driven recommendations and auto-categorization, projected to cut content search time by 70%.
-
-Building a scalable system for unlimited local media, targeting an 85%+ improvement in organization efficiency.
-
-Designing for seamless playback with enhanced subtitle accuracy and Netflix-like features (e.g., "Play Next Episode," watch history).
-
-Python-Based Desktop Workspace Launcher Present
-
+Talk to your CV - A RAG-GraphQL based Python Microservice Link
+Aug '25 — Present
+Built a full-stack AI chat application with a 3-tier architecture (React, Node.js, Python), increasing personal information retrieval speed by over 90%.
+Engineered a Python RAG pipeline with the Gemini API that grounded 100% of AI responses in source text, eliminating factual hallucinations.
+Developed a GraphQL API gateway in Node.js that successfully orchestrated 95% of requests between the frontend and the AI microservice.
+Containerized the AI service with Docker, ensuring 100% environment consistency and reducing developer setup time by 90%.
+Python-Based Desktop Workspace Launcher
+Present
 Built a CLI tool to auto-launch grouped apps and websites from predefined JSON workflows.
-
 Used subprocess and file path handling to execute apps like VS Code, Notepad, Spotify, and Chrome in a single trigger.
-
 Works as a cross-platform system supporting .lnk shortcuts (Windows) and .desktop files (Linux).
-
 Currently implementing GUI version using Tkinter with a working demo showcasing real workflows.
-
 EDUCATION
-
-B.Tech in Computer Science & Information Technology, Symbioisis University of Applied Sciences Aug '19 — Jun '23
-
+Specialized Program in Artificial Intelligence & Machine Learning with Drone Tech, Tihan IIT Hyderabad
+Jul '25 — Present
+B.Tech in Computer Science & Information Technology, Symbioisis University of Applied Sciences
+Aug '19 — Jun '23
 Overall - 8.6 SGPA
-
-High School, Choithram School North Campus Mar '19
-
+High School, Choithram School North Campus
+Mar '19
 12th Standard (Aggregate: 83.4 %)
-
 10th Standard (CGPA: 9.2)
-
 CERTIFICATIONS
+100 Days Expert Coder Program, PrepBytes
+Oct '21
+Adobe Photoshop CC, Advanced Training Course, Udemy
+Sep '22
 
-100 Days Expert Coder Program, PrepBytes Oct '21
-
-Adobe Photoshop CC, Advanced Training Course, Udemy Sep '22
+
