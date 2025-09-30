@@ -1,5 +1,5 @@
     // cv-ai-frontend/src/Chatbox.tsx
-    import React, { useState } from 'react';
+    import React, { useState, useRef, useEffect } from 'react';
     import { gql, useMutation } from '@apollo/client';
 
     const SEND_MESSAGE_MUTATION = gql`
@@ -8,31 +8,76 @@
         }
     `;
 
+    interface Message {
+      id: number;
+      text: string;
+      sender: 'user' | 'ai';
+      timestamp: string;
+    }
+
     const Chatbox: React.FC = () => {
-      const [messages, setMessages] = useState<string[]>([]);
+      const [messages, setMessages] = useState<Message[]>([
+        {
+          id: Date.now(),
+          text: "Hello! I'm an AI assistant. Ask me anything about the CV.",
+          sender: 'ai',
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        }
+      ]);
       const [input, setInput] = useState<string>('');
+      const messagesEndRef = useRef<null | HTMLDivElement>(null);
 
       const [askCV, { loading, error }] = useMutation(SEND_MESSAGE_MUTATION);
 
+      const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      };
+
+      useEffect(() => {
+        scrollToBottom();
+      }, [messages]);
+
       const handleSend = async () => {
         if (input.trim()) {
-          const userMessage = input;  
-          setMessages((prevMessages) => [...prevMessages, `You: ${userMessage}`]);
-          // In a later step, we'll send this 'input' to the backend
+          const userMessageText = input;
+          const newUserMessage: Message = {
+            id: Date.now(),
+            text: userMessageText,
+            sender: 'user',
+            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          };
+          setMessages((prevMessages) => [...prevMessages, newUserMessage]);
           setInput('');
 
           try {
-            // Call the GraphQL mutation with the correct variable name
-            const { data } = await askCV({ variables: { question: userMessage } }); // Changed sendMessage to askCV and message to question
+            const { data } = await askCV({ variables: { question: userMessageText } });
     
-            if (data && data.askCV) { // Check data.askCV directly as it returns a String
-              setMessages((prevMessages) => [...prevMessages, `AI: ${data.askCV}`]);
+            if (data && data.askCV) {
+              const aiMessage: Message = {
+                id: Date.now() + 1,
+                text: data.askCV,
+                sender: 'ai',
+                timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+              };
+              setMessages((prevMessages) => [...prevMessages, aiMessage]);
             } else {
-              setMessages((prevMessages) => [...prevMessages, `AI: Error - No valid response received.`]);
+              const aiErrorMessage: Message = {
+                id: Date.now() + 1,
+                text: 'Error - No valid response received.',
+                sender: 'ai',
+                timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+              };
+              setMessages((prevMessages) => [...prevMessages, aiErrorMessage]);
             }
           } catch (e) {
             console.error("Error sending message:", e);
-            setMessages((prevMessages) => [...prevMessages, `AI: Error - Could not send message.`]);
+            const aiConnectionError: Message = {
+              id: Date.now() + 1,
+              text: 'Error - Could not send message.',
+              sender: 'ai',
+              timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            };
+            setMessages((prevMessages) => [...prevMessages, aiConnectionError]);
           }
         }
       };
@@ -40,13 +85,16 @@
       return (
         <div
           style={{
-            background: 'linear-gradient(135deg, #f8fafc 0%, #e8ecf3 100%)',
-            border: '1px solid #e3e7ee',
-            borderRadius: '18px',
-            boxShadow: '0 4px 24px 0 rgba(60,72,100,0.08)',
+            background: '#ffffff',
+            border: '1px solid #e2e8f0',
+            borderRadius: '24px',
+            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.07)',
             padding: '0',
-            width: '420px',
-            height: '540px',
+            width: '100%',
+            maxWidth: '580px',
+            height: '75vh',
+            maxHeight: '720px',
+            minHeight: '450px',
             display: 'flex',
             flexDirection: 'column',
             fontFamily: 'Inter, Segoe UI, Arial, sans-serif',
@@ -63,43 +111,36 @@
               gap: '12px',
             }}
           >
-            {messages.map((msg, index) => {
-              const isUser = msg.startsWith('You:');
-              const content = msg.replace(/^You: |^AI: /, '');
+            {messages.map((msg) => {
+              const isUser = msg.sender === 'user';
+              const content = msg.text;
               return (
                 <div
-                  key={index}
+                  key={msg.id}
                   style={{
                     alignSelf: isUser ? 'flex-end' : 'flex-start',
-                    background: isUser ? '#e6f0ff' : '#fff',
-                    color: isUser ? '#1a3e72' : '#222b3a',
-                    border: isUser ? '1px solid #b3d4fc' : '1px solid #e3e7ee',
+                    background: isUser ? '#3b82f6' : '#f1f5f9',
+                    color: isUser ? '#ffffff' : '#1e293b',
+                    border: '1px solid transparent',
                     borderRadius: isUser
-                      ? '16px 16px 4px 16px'
-                      : '16px 16px 16px 4px',
+                      ? '20px 20px 4px 20px'
+                      : '20px 20px 20px 4px',
                     padding: '10px 16px',
                     maxWidth: '75%',
                     fontSize: '15px',
-                    boxShadow: isUser
-                      ? '0 1px 4px 0 rgba(60,72,100,0.04)'
-                      : '0 1px 4px 0 rgba(60,72,100,0.06)',
+                    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)',
                     marginBottom: '0',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    textAlign: 'left',
                   }}
                 >
-                  {!isUser && (
-                    <span
-                      style={{
-                        fontWeight: 600,
-                        color: '#6b7a90',
-                        fontSize: '13px',
-                        marginRight: '6px',
-                        letterSpacing: '0.01em',
-                      }}
-                    >
-                      AI
-                    </span>
-                  )}
-                  {content}
+                  <div>
+                    {content}
+                  </div>
+                  <span style={{ fontSize: '11px', color: '#94a3b8', alignSelf: 'flex-end', marginTop: '4px' }}>
+                    {msg.timestamp}
+                  </span>
                 </div>
               );
             })}
@@ -107,14 +148,14 @@
               <div
                 style={{
                   alignSelf: 'flex-start',
-                  background: '#fff',
-                  color: '#222b3a',
-                  border: '1px solid #e3e7ee',
-                  borderRadius: '16px 16px 16px 4px',
+                  background: '#f1f5f9',
+                  color: '#1e293b',
+                  border: '1px solid transparent',
+                  borderRadius: '20px 20px 20px 4px',
                   padding: '10px 16px',
                   maxWidth: '75%',
                   fontSize: '15px',
-                  boxShadow: '0 1px 4px 0 rgba(60,72,100,0.06)',
+                  boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '8px',
@@ -171,6 +212,14 @@
                         0% { opacity: 0.2; }
                         50%, 100% { opacity: 1; }
                       }
+                      .chat-input:focus {
+                        border-color: #3b82f6;
+                        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+                      }
+                      .send-button:not(:disabled):hover {
+                        transform: translateY(-1px);
+                        box-shadow: 0 6px 16px rgba(59, 130, 246, 0.3);
+                      }
                     `}
                   </style>
                 </span>
@@ -180,14 +229,14 @@
               <div
                 style={{
                   alignSelf: 'flex-start',
-                  background: '#fff0f0',
-                  color: '#c0392b',
-                  border: '1px solid #f5c6cb',
-                  borderRadius: '16px 16px 16px 4px',
+                  background: '#fff0f0', // Keep error background distinct
+                  color: '#c0392b',      // Keep error text color distinct
+                  border: '1px solid #f5c6cb', // Keep error border distinct
+                  borderRadius: '18px 18px 18px 6px',
                   padding: '10px 16px',
                   maxWidth: '75%',
                   fontSize: '15px',
-                  boxShadow: '0 1px 4px 0 rgba(60,72,100,0.06)',
+                  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
                 }}
               >
                 <span
@@ -204,19 +253,21 @@
                 Error: {error.message}
               </div>
             )}
+            <div ref={messagesEndRef} />
           </div>
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
-              borderTop: '1px solid #e3e7ee',
+              borderTop: '1px solid #e2e8f0',
               padding: '16px 20px',
-              background: '#f6f8fa',
-              borderRadius: '0 0 18px 18px',
+              background: '#ffffff',
+              borderRadius: '0 0 22px 22px',
               gap: '10px',
             }}
           >
             <input
+              className="chat-input"
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -227,37 +278,38 @@
               }}
               style={{
                 flexGrow: 1,
-                padding: '10px 14px',
-                border: '1px solid #d1d7e0',
-                borderRadius: '12px',
+                padding: '12px 16px',
+                border: '1px solid transparent',
+                borderRadius: '14px',
                 fontSize: '15px',
                 outline: 'none',
-                background: '#fff',
-                color: '#222b3a',
-                transition: 'border 0.2s',
-                boxShadow: '0 1px 2px 0 rgba(60,72,100,0.03)',
+                background: '#f1f5f9',
+                color: '#1e293b',
+                transition: 'border 0.2s, box-shadow 0.2s',
+                boxShadow: 'none',
               }}
               placeholder="Type your message..."
               disabled={loading}
               autoFocus
             />
             <button
+              className="send-button"
               onClick={handleSend}
               style={{
                 background: loading
-                  ? 'linear-gradient(90deg, #b3b9c9 0%, #d1d7e0 100%)'
-                  : 'linear-gradient(90deg, #3b82f6 0%, #2563eb 100%)',
+                  ? '#d1d5db'
+                  : '#3b82f6',
                 color: '#fff',
                 border: 'none',
-                borderRadius: '10px',
-                padding: '10px 22px',
+                borderRadius: '14px',
+                padding: '12px 24px',
                 fontWeight: 600,
                 fontSize: '15px',
                 cursor: loading ? 'not-allowed' : 'pointer',
                 boxShadow: loading
                   ? 'none'
-                  : '0 2px 8px 0 rgba(60,72,100,0.08)',
-                transition: 'background 0.2s, box-shadow 0.2s',
+                  : '0 4px 12px rgba(59, 130, 246, 0.3)',
+                transition: 'background 0.2s, box-shadow 0.2s, transform 0.2s',
                 opacity: loading ? 0.7 : 1,
               }}
               disabled={loading}

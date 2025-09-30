@@ -27,5 +27,9 @@ services:
       dockerfile: dockerfile
     ports:
       - "5173:5173"
+    volumes:
+      - ./cv-ai-frontend:/app
+      - /app/node_modules # This is crucial to prevent host's node_modules from overwriting container's
+    command: npm run dev -- --host 0.0.0.0 # Use standard npm script with host argument
     depends_on:
-      - gateway 
+      - gateway
