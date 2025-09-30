@@ -6,8 +6,8 @@ This project is a simple AI-powered service for answering questions about a CV. 
 
 The project consists of two main components:
 
-1.  **Python Backend (`cv-ai-service`)**: A Flask application that exposes a RESTful API for the AI service. It uses LangChain and Google's Gemini Pro model to power the RAG functionality.
-2.  **Node.js API Gateway (`cv-api-gateway`)**: A GraphQL API gateway built with Apollo Server and Express. It provides a clean, modern interface for interacting with the backend service.
+1.  **Python Backend (`rag-document-engine`)**: A Flask application that exposes a RESTful API for the AI service. It uses LangChain and Google's Gemini Pro model to power the RAG functionality.
+2.  **Node.js API Gateway (`rag-document-gateway`)**: A GraphQL API gateway built with Apollo Server and Express. It provides a clean, modern interface for interacting with the backend service.
 
 Here is a high-level diagram of the architecture:
 [Client] -> [GraphQL API Gateway (Node.js)] -> [RESTful API (Python)] -> [RAG Model]
@@ -28,7 +28,7 @@ To get the project up and running, you will need to set up both the Python backe
 1.  **Clone the repository**:
     ```bash
     git clone <repository-url>
-    cd cv-ai-service
+    cd rag-document-engine
     ```
 
 2.  **Create a virtual environment and install dependencies**:
@@ -57,7 +57,7 @@ To get the project up and running, you will need to set up both the Python backe
 
 1.  **Navigate to the gateway directory**:
     ```bash
-    cd cv-api-gateway
+    cd rag-document-gateway
     ```
 
 2.  **Install dependencies**:
